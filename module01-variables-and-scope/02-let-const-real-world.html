@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <title>Lesson 03 = Let and Const in the Real World</title>
+</head>
+<body>
+    <script>
+        /** IFFE (Immediately Invoked Function Expression **/
+        
+        /* OLD WAY */
+        (function () {
+            var name='jeff'
+            console.log('name');
+        })();
+
+        /*ES6 - can use let and just curly brackets */
+        {
+            let dogName = 'cody';
+            console.log(dogName);
+        }
+    
+        
+        /** Temporal Dead Zone **/
+        console.log(pizza);         //undefined - still knows about this variable
+        var pizza = 'Deep Dish!';
+
+        console.log(pasta);
+
+                //(temporal dead zone)
+
+        let pasta = 'Spaghetti!';   //Reference Error
+
+        
+        /***** ONE POSSIBLE INTERPRETATION *****/
+        /*
+        *     1) use CONST by default
+        *     2) only use LET if rebinding is needed
+        *     3) var shouldn't be used in ES6
+        */
+
+        /***** ANOTHER POSSIBLE INTERPRETATION *****/
+        /*
+        *     1) use VAR for top-level variables that are shared across many scopes
+        *     2) use LET for localized variables in smaller scopes
+        *     3) refactor LET to CONST only after some code has been written and you're reasonably sure you won't be reassigning it
+        */
+    </script>
+</body>
+</html>

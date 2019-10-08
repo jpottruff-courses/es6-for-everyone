@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <head>
+        <title> Lesson 01 - var, let const</title>
+    </head>
+    <body>
+        
+        
+        <script>
+
+    /****  VAR  ****/
+    /*      
+    *      - reassignable AND redeclarable  
+    *      - scope: function scope 
+    *          - only available in the function they are created in
+    *          - OR if not created in a function - have global scope (Ie. available in the window)
+    */
+        
+        function setWidth() {
+             var width = 100;
+             console.log(width);         //works when function called
+         }
+         setWidth();
+         console.log('Width outside of the function is....');
+        //  console.log(width);          //does not work - throws ReferenceError
+
+        
+        //When Function Scope can bite you
+        var age = 50;
+        if (age > 12) {
+            var varDogYears = age * 7;      // note: this becomes global - it is NOT inside a function
+            let letDogYears = age * 7;      // note: this becomes global - it is NOT inside a function
+            console.log(`You are ${varDogYears} VAR dog years old`);
+            console.log(`You are ${letDogYears} LET dog years old`);
+        }
+
+        console.log(`VAR Dog years ${varDogYears}`);        //variable is now global
+        // console.log(`LET Dog years ${letDogYears}`);        //doesn't work - ReferenceError
+
+
+    /**** LET ****/
+    /*
+    *      - reassignable (but cannot redeclare it)     
+    *          - NOTE: could redeclar it in a child block - but these would be 2 different variables (see below)
+    *      - scope: block (in between ANY curly brackets - not just a function)
+    */
+
+         let winner = 'john'
+         let points = 40;
+         
+         if (points > 30) {
+             let winner="jane";         // different variable than above
+             console.log(winner);
+         }
+
+         console.log(winner);
+
+    /**** CONST ****/
+    /*
+    *      - reassignable/redeclarable (except for in different scopes)
+    */
+
+         const key = 'abc123';
+         console.log(key);
+
+         key = "PPP";
+        //  console.log(key);          //doesn't work - ReferenceError
+
+        </script>
+    </body>
+</html>
