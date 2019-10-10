@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+    <title>Arrow Functions</title>
+</head>
+<body>
+
+    <script>
+        const names = ['katie', 'jeff', 'bronson'];
+
+        /*********** ARROW FUNCTIONS ************/
+
+        // Old Way
+        const fullNames = names.map(function(name) {
+            return `${name} weeee`;
+        });
+
+        // Same with Arrow Functions
+        const fullNames2 = names.map((name) => {
+            return `${name} weeee2`;
+        });
+
+        // Can leave the paraentheses off if you only have 1 argument
+        const fullNames3 = names.map(name => {
+            return `${name} weeee3`;
+        });
+
+        // Can also do an IMPLICIT return (ie. don't write 'return')
+        const fullNames4 = names.map(name =>`${name} weeee4`);
+        
+        // If there is no argument - simply put ()
+        const fullNamesNoArg = names.map(() =>`no arg!`);
+        
+        
+        console.log(fullNames);
+        console.log(fullNames2);
+        console.log(fullNames3);
+        console.log(fullNames4);
+        console.log(fullNamesNoArg);
+        
+        /*********** NOTE: all arrow functions are ANONYMOUS functions *********/
+
+        /*** You can put them in a variable though! ***/
+
+        const sayMyName = (name) => { alert(`Your name is ${name}`) }
+        sayMyName('BRONSON');
+
+
+
+        /*********** MORE ARROW FUNCTION EXAMPLES ************/
+        
+        /** Returning an Object Literal **/
+        // put paraentheses around the Object so it doesn't mistake the curly brackets for those of a function block
+        const race = '100m dash';
+        const winners = ['Hunter Gath', 'Singa Song', 'Imda Bos'];
+
+        const win = winners.map((winner, i) => ({name: winner, race: race, place: i + 1}) );
+        //NOTE: race: race seems redundant - you can shorten it like this, below
+        const win2 = winners.map((winner, i) => ({name: winner, race, place: i + 1}) );
+
+        console.log(win);
+        console.table(win);     //check this out too!
+        
+        console.log('WIN 2:')
+        console.table(win2);     
+        
+
+        /** Filter for something **/
+        // this returns the ages that meet the age >= 60 condition 
+        const ages = [23, 62, 7, 234, 45, 67, 44, 789, 43];
+        const old = ages.filter(age => age >= 60);
+
+        console.log(ages);
+        console.log(old)
+    </script>
+</body>
+</html>

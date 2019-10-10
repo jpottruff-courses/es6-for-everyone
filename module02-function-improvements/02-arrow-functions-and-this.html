@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+    <title>Arrow functions and this (keyword)</title>
+    <style>
+  .wrap {
+      min-height: 100vh;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      font-weight: 100;
+      color:white;
+    }
+
+    .box {
+      background:black url(https://unsplash.it/1500/1500?image=560&blur=0.5) center fixed no-repeat;
+      width:50px;
+      height:50px;
+      padding:50px;
+      transition: width 0.2s, height 0.6s;
+      position: relative;
+    }
+
+    .box.opening {
+      width:500px;
+      height:500px;
+    }
+
+    .box h2 {
+      position: absolute;
+      width:100%;
+      font-size: 100px;
+      transform:translateX(-200%);
+      transition: all 0.5s;
+      top:0;
+    }
+
+    .box p {
+      position: absolute;
+      width:100%;
+      transform:translateX(200%);
+      transition: all 0.5s;
+      bottom:0;
+    }
+
+    .box.open > * {
+      transform:translateX(0%);
+    }
+    </style>
+
+
+</head>
+
+
+<body> 
+
+    <div class="wrap">
+        <div class="box">
+            <h2>Wes Bos</h2>
+            <p class="social">@wesbos</p>
+        </div>
+    </div>
+
+    <script>
+        // Get a reference to the box and add a click event listener
+        const box = document.querySelector('.box');
+
+        // Pre ES6 / Arrow function way - logs thhe DIV
+        // box.addEventListener('click', function() {
+        //      console.log(this);
+        // });
+        
+        //Using ARROW FUNCTION
+        // 'this' is not bound to anything - it will spit out WINDOW (the parent element)
+        // CANNOT just use arrow functions all the time; in this case we need access to 'this'
+        // box.addEventListener('click', () => {
+        //     console.log(this);
+        // });
+
+        box.addEventListener('click', function() {
+            this.classList.toggle('opening');
+             
+            // Using 'function' here - will run into the same problem as the arrow function above
+            // 'this' is not bound to anything (we are now in a new function)
+            // when 'this' is not bound to anything - it inherits the parent value (ie. WINDOW in this case)
+            // setTimeout(function() {
+            //     console.log(this.classList);
+            //     this.classList.toggle('open');
+            // }, 500);
+
+            //USE AN ARROW FUNCTION HERE
+            //WHY - 'this' will not change (ie. inherits its parent value)
+            setTimeout(() => {
+                // console.log(this.classList);
+                this.classList.toggle('open');
+            }, 500);
+ 
+        });
+    
+    
+    
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+    <title>When NOT to use Arrow Functions</title>
+</head>
+<body>
+    <style>
+        button { font-size: 100px; }
+        .on { background: pink; }
+    </style>
+    
+    <button id="pushy">Push Me</button>
+
+
+
+
+    <script>
+
+    /** When you really need 'this' **/
+        
+        const button = document.querySelector('#pushy');
+        // Will get - WINDOW and UNDEFINED
+        // button.addEventListener('click', ()=> {
+        //     console.log(this);
+        //     console.log(this.classList);
+        //     this.classList.toggle('on');
+        // })
+
+        button.addEventListener('click', function(){
+            console.log(this);
+            console.log(this.classList);
+            this.classList.toggle('on');
+        });
+
+
+
+    /** When you need a method to bind to an Object **/
+
+        const person = {
+            points: 23,
+            
+            /*Methods that needs to be bound to the Object*/
+
+            //ARROW FUNCTION - same problem with 'this'
+            scoreArrow: ()=> {
+                console.log('in arrow function, this is: ')
+                console.log(this);
+                this.points++
+            },
+
+            //NOT ARROW FUNCTION - works
+            scoreNotArrow: function() {
+                console.log(' ');
+                console.log('in not arrow; this is:');
+                console.log(this)
+                this.points++
+            },
+
+            //EVEN BETTER!!
+            scoreBest() {
+                console.log(' ');
+                console.log('in best; this is:');
+                console.log(this)
+                this.points += 5;
+            }
+
+        }
+
+        console.log(person);
+        person.scoreArrow();
+        console.log(person);            //SCORE THE SAME IF USING ARROW FUNCTION
+
+        person.scoreNotArrow();
+        console.log(person)             //SCORE INCREASES
+        person.scoreBest();
+        console.log(person)             //SCORE INCREASES
+
+
+    /** When you need to add a PROTYPE METHOD **/
+        
+        class Car {
+            constructor(make, color) {
+                this.make = make;
+                this.color = color;
+            }
+        }
+
+        const beemer = new Car('bmw', 'blue');
+        const subie = new Car('Subaru', 'white');
+
+        //Adding PROTOTYPE METHOD (ie. adding after the fact)
+        Car.prototype.summarize = () => {
+            return `This car is a ${this.make} in the color ${this.color}`;
+        }
+        Car.prototype.summarize2 = function() {
+            return `This car is a ${this.make} in the color ${this.color}`;
+        }
+
+        console.log(beemer);
+        console.log(beemer.summarize());            // UNDEFINED
+        console.log(beemer.summarize2());           // GOOD
+
+
+        /** When you need arguments object **/
+
+        //ARROW FUNCTION will NOT give you the arguments Object
+        // const orderChildren = () => {
+        //     const children = Array.from(arguments);
+        //     return children.map((child, i) => {
+        //         return `$child was #${i + 1}`;
+        //     })
+        //     console.log(arguments);
+        // }
+
+        const orderChildren2 = function() {
+            const children = Array.from(arguments);
+            return children.map((child, i) => {
+                return `${child} was #${i + 1}`;
+            })
+            console.log(arguments);
+        }
+
+        // console.log(orderChildren('jill', 'jack', 'jenna'));
+        console.log(orderChildren2('jill', 'jack', 'jenna'));
+
+
+
+
+    
+    </script>
+
+</body>
+
+</html>
