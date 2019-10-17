@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <head>
+        <title>Tagged Tempalte Literals</title>
+        <meta charset="utf-8">
+
+        <style>
+            .hl { background: yellow; }
+        </style>
+    </head>
+    <body>
+
+        <script>
+            
+            //useless function for demo purposes
+            function useless() {
+                return 'oh great';
+            }
+
+
+            function highlight(strings, ...values){
+                let str = '';
+                strings.forEach((string, i) => {
+                    // NOTE: or statement accounts for strings always being 1 longer than values
+                    // str += string + (values[i] || '');
+                    str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
+                });
+
+                return str;
+            }
+
+
+
+            const name = 'Snoodles';
+            const age = 5;
+            const sentence = `My dog ${name} is ${age * 7} years old`; 
+
+            
+            // Tagged Template Literals 
+            // you can essentially write a function to throw in front of your Template Literal (ie. tag it) and it will return
+            // it will take in the value you are passing it
+
+
+            const sentence2 = useless `${sentence}`;
+            const sentenceCombined = highlight`My cat is also ${name} is ${age * 7} years old too`; 
+            
+            console.log(sentence2);
+            document.body.innerHTML = sentenceCombined;
+
+
+
+        /**** UNCOMMENT TO ILLUSTRATE CONCEPT ****/
+
+            // See "UNCOMMENT TO ILLUSTRATE CONCEPT BELOW"
+            function littleBetter(strings, ...values){
+                //This stops the function from running at this point 
+                //NOTE: CHECK THE SOURCES TAB in dev tools
+                //note the Local strings and values variables
+                debugger;
+            }
+
+            // const sentenceDEBUG = littleBetter `My cat is also ${name} is ${age * 7} years old too`; 
+            // This breaks things up a little differently - because a variable is triggering something sooner!
+            // const sentenceGOTCHA = littleBetter `${sentence}`;
+
+            // console.log(sentenceDEBUG);         // NOTE how the strings and values are separated
+            // console.log(sentenceGOTCHA);     //Separated differently strings = 2 empty elements, values = the whole thing
+        /**** END ****/
+
+
+
+        </script>
+
+    </body>
+</html>

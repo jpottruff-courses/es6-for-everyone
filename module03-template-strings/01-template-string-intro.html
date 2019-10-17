@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+    <head>
+        <title>Intro to Tempalte Strings</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+
+
+
+    
+        <script>
+
+        /***** INTRO *****/
+            
+            // This way sucks and is a pain
+            var name = 'Snickers';
+            var age = 2;
+            var sentence = 'My dog ' + name + ' is ' + age * 7 + ' years old';
+
+            // ES6 Option - template strings
+            // can write actual code etc in there too 
+            const name2 = 'Snoodles';
+            const age2 = 5;
+            const sentence2 = `My dog ${name2} is ${age2 * 7} years old - and this sentence is better`;
+
+            console.log(sentence);
+            console.log(sentence2);
+
+
+
+
+        /***** Markup Example *****/
+
+            const person = { name: 'John',
+                            job: 'Fireman',
+                            city: 'Toronto',
+                            bio: 'weeeeeeeee-ou'
+            };
+
+            const markup = `
+                <div class='person'>
+                    <h2>
+                        ${person.name}
+                        <span class="job">${person.job}</span>
+                    </h2>
+                    <p class="location">${person.city}</p>
+                    <p class="bio">${person.bio}</p>
+                </div>
+                `;
+
+            //putting it in the body
+            // document.body.innerHTML = markup;
+
+
+
+
+
+        /***** Nesting Template Strings *****/
+
+            const dogs = [ 
+                {name: 'brrrrrrrruse', age: 4 },
+                {name: 'martha', age: 7 },
+                {name: 'marion', age: 11 },
+            ];
+
+            //NOTE: below - .map() returns an array; .join('') gets rid of the comma
+            const markup2 = `
+                <ul class="dogs">
+                    ${dogs.map(dog => `<li>${dog.name} is ${dog.age * 7} in Dog Years!</li>`)}
+                </ul>
+                <ul class="dogs-joined">
+                    ${dogs.map(dog => `<li>${dog.name} is ${dog.age * 7} in Dog Years!</li>`).join('')}
+                </ul>
+            `;
+
+            //putting it in the body
+            // document.body.innerHTML = markup2;
+
+
+
+        /***** IF Statements in Tempalte Strings *****/
+            const song = {
+                name: 'Dying to Live',
+                artist: 'Tupac',
+                featuring: 'Biggie Smalls'
+            };
+
+            const markup3 = `
+                <div class="song">
+                    <p>
+                        ${song.name} - ${song.artist} 
+                        ${(song.featuring) ? `(Featuring ${song.featuring})` : ''} 
+                    </p>
+                </div>
+            `;
+
+            //putting it in the body
+            // document.body.innerHTML = markup3;
+
+
+
+
+
+        /***** Render Function Example *****/
+        // NOTE: a bit react like
+
+                const beer = {
+                    name: 'Belgian Wit',
+                    brewery: 'Steam Whistle Brewery',
+                    keywords: ['pale', 'cloudy', 'spiced', 'crisp']
+                }
+
+                //Render Function
+                function renderKeywords(keywords) {
+                    return `
+                        <ul>
+                            ${keywords.map( keyword => `<li>${keyword}</li>`).join('')}
+                        </ul>
+                    `;
+                }
+
+                const markup4 = `
+                    <div>
+                        <h2>${beer.name}</h2>
+                        <p class="brewery">${beer.brewery}</p>
+                        ${renderKeywords(beer.keywords)}
+                    </div>
+                
+                `;
+                //putting it in the body
+                document.body.innerHTML = markup4;
+
+
+        </script>
+
+    </body>
+</html>
