@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module 03 - TExercise 02</title>
+
+  <style>
+    abbr {
+      border-bottom:1px dotted grey;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bio">
+
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/0.8.2/purify.min.js"></script>
+<script>
+    // User data - but injecting JS when image loads (template strings)
+    // const first = 'Bad Guy'
+    // const about = `I love to do bad stuff <img src="http://unsplash.it/100/100?random" onload="alert('you got hacked');" />`;
+
+    // Put on the page and you;ll get a pop up
+    // const bio = document.querySelector('.bio');
+    // bio.innerHTML = about;
+
+
+
+
+
+    // Instead
+    // Sanitize function
+    // NOTE: could also use DOMPurify.sanitize(whatever) everywhere - or you could simply tag it with sanitize if you build the function 
+    function sanitize(strings, ...values){
+        // This is still not sanitized
+        const dirty = strings.reduce( (prev, next, i) => `${prev}${next}${values[i] || ''}`, '');
+        
+        return DOMPurify.sanitize(dirty);
+    }
+
+    // NOTE: can only sanitize template literal
+    // const first = sanitize'Bad Guy';
+    const first = sanitize`Bad Guy`;
+    const about = sanitize`I love to do bad stuff <img src="http://unsplash.it/100/100?random" onload="alert('you got hacked');" />`;
+
+
+    //preformat what you want to put on the page
+    const safeHTML = `
+        <h3>${first}</h3>
+        <p>${about}</p>
+    `;
+
+
+
+    const bio = document.querySelector('.bio');
+    bio.innerHTML = safeHTML;
+
+
+</script>
+</body>
+</html>

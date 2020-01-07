@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module 04 - String Methods</title>
+</head>
+<body>
+
+    <script>
+    const course = 'RFB2';
+    const flightNumber = '20-AC2018-jz';
+    const accountNumber = '825242631RT0001';
+    const make = 'BMW';
+    const model = 'x5';
+    const colour = 'Royal Blue';
+
+    // .startsWith()
+    console.log(course.startsWith('RFB'));          // true
+    console.log(course.startsWith('rfb'));          // false
+
+    console.log(flightNumber.startsWith('AC'));     // false
+    console.log(flightNumber.startsWith('AC', 3));  // true
+
+    // .endsWith()
+    console.log(accountNumber.endsWith('RT'));      // false
+    console.log(accountNumber.endsWith('RT', 11));  // true (only taking first 11 numbers)
+
+    // .includes()
+    console.log(flightNumber.includes('AC'));       // true
+
+    // .repeat()
+    console.log('hui'.repeat(10));
+
+
+    // Function example for padding
+    function leftPad(str, length = 20) {
+        return `-> ${' '.repeat(length - str.length)}${str}`;
+    }
+
+    console.log(leftPad(make));
+    console.log(leftPad(model));
+    console.log(leftPad(colour));
+
+
+    </script>
+
+</body>
+</html>

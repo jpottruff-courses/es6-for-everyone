@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <head>
+        <title>Module 03 - Exercise 01</title>
+    </head>
+    <body>
+
+        <div class='bio'>
+
+
+        </div>
+
+        <script>
+            // Dictionary
+            const dict = {
+                HTML: 'Hypertext Markup Language',
+                CSS: 'Cascading Style Sheets',
+                JS: 'JavaScript'
+            };
+
+            // This function checks the sentence for a matching dictionary item 
+            // Note: using a SPREAD OPERATOR
+            function addAbbreviations(strings, ...values) {
+                
+
+                // if the values taken in by the function has that value in the dictionary, 
+                // return it wrapped in an abbreviation tag with a title containging its dictionary value
+                const abbreviated = values.map(value => {
+                    if (dict[value]) {
+                        return `<abbr title="${dict[value]}">${value}</abbr>`;
+                    }
+
+                    // If not return just the value
+                    return value; 
+                });
+
+                //String reduce method, takes a function
+                // the function takes whatever you start with (ie. the sentence)
+                // then for each TEMPLATE STRING in the sentence
+                // replaces it with abbreviated[index] OR nothing 
+                return strings.reduce( (sentence, string, i) => {
+                    return `${sentence}${string}${abbreviated[i] || ''}`;
+                }, '');
+            }
+
+            const first = 'Jeff';
+            const last = 'Pottruff';
+            
+            // NOTE: In this case stuff will not be wrapped
+            const sentence = addAbbreviations`Hello my name is ${first} ${last} and I love to code ${'HTML'}, ${'CSS'}, and ${'JS'} .... and ${'stuff'}`;
+            // const sentence = `Hello my name is ${first} ${last} and I love to code ${'HTML'}, ${'CSS'}, and ${'JS'}`;
+
+            const bio = document.querySelector('.bio');
+            const p = document.createElement('p');
+            p.innerHTML = sentence;
+            bio.appendChild(p);
+
+            p.innerHTML = sentence;
+            bio.appendChild(p);
+        </script>
+    </body>
+</html>
